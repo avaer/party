@@ -3,24 +3,6 @@ import {renderer, camera, runtime, world, universe, physics, ui, rig, app, appMa
 
 const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THREE.Quaternion(), new THREE.Vector3(1000, 1, 1000), false);
 
-const w = 4;
-const portalSpec = {
-  objects: [
-    {
-      position: [-3, 0, -10],
-      contentId: 'https://webaverse.github.io/street/index.js',
-    },
-  ],
-  extents: [
-    [-w/2, 0, -w/2],
-    [w/2, w, w/2],
-  ],
-};
-const s = JSON.stringify(portalSpec);
-const b = new Blob([s], {
-  type: 'application/json',
-});
-const u = URL.createObjectURL(b) + '/portal.url';
-world.addObject(u, null, new THREE.Vector3(), new THREE.Quaternion());
-
-console.log('add portal', portalSpec);
+(async () => {
+  await world.addObject(`https://webaverse.github.io/street/street.url`, null, new THREE.Vector3(), new THREE.Quaternion());
+})();
