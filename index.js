@@ -5,6 +5,10 @@ const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THRE
 
 const _clone = o => JSON.parse(JSON.stringify(o));
 
+const textMesh = ui.makeTextMesh('Mode Select', undefined, 30, 'center', 'middle');
+textMesh.position.set(0, 20, -100);
+app.object.add(textMesh);
+
 (async () => {
   const w = 4;
   const roomSpecs = [
