@@ -23,12 +23,18 @@ const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THRE
       color: 0x00FFFF,
     },
   ];
+  const res = await fetch(`https://webaverse.github.io/street/street.scn`);
+  const streetScn = await res.json();
+  streetScn.extents = [
+    [-w/2, 0, -w/2],
+    [w/2, w, w/2],
+  ];
   await Promise.all([
-    world.addObject(`./street/street.url`, null, new THREE.Vector3(), new THREE.Quaternion())
+    world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street.url', null, new THREE.Vector3(), new THREE.Quaternion())
       .then(portalMesh => {
         portalMesh.material.uniforms.uColor.value.setHex(0xFF0000);
       }),
-    world.addObject(`./street/street-multiplayer.url`, null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
+    world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
       .then(portalMesh => {
         portalMesh.material.uniforms.uColor.value.setHex(0x00FF00);
       }),
