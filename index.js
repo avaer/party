@@ -3,6 +3,8 @@ import {renderer, camera, runtime, world, universe, physics, ui, rig, app, appMa
 
 const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THREE.Quaternion(), new THREE.Vector3(1000, 1, 1000), false);
 
+const _clone = o => JSON.parse(JSON.stringify(o));
+
 (async () => {
   const w = 4;
   const roomSpecs = [
@@ -51,29 +53,35 @@ const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THRE
           target: popoverTarget,
         });
       }),
-    world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
-      .then(portalMesh => {
-        portalMesh.material.uniforms.uColor.value.setHex(0x00FF00);
-        
-        const popoverWidth = 600;
-        const popoverHeight = 200;
-        const popoverTarget = new THREE.Object3D();
-        popoverTarget.position.copy(portalMesh.position).add(new THREE.Vector3(0, 2, 0));
-        const popoverTextMesh = (() => {
-          const textMesh = ui.makeTextMesh('Multiplayer', undefined, 0.5, 'center', 'middle');
-          textMesh.position.z = 0.1;
-          textMesh.scale.x = popoverHeight / popoverWidth;
-          textMesh.color = 0xFFFFFF;
-          return textMesh;
-        })();
-        const popoverMesh = popovers.addPopover(popoverTextMesh, {
-          width: popoverWidth,
-          height: popoverHeight,
-          target: popoverTarget,
-        });
-      }),
+    (() => {
+      const streetMultiplayerScn = _clone(streetScn);
+      streetMultiplayerScn.room = 'multiplayer';
+      return world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetMultiplayerScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
+        .then(portalMesh => {
+          portalMesh.material.uniforms.uColor.value.setHex(0x00FF00);
+          
+          const popoverWidth = 600;
+          const popoverHeight = 200;
+          const popoverTarget = new THREE.Object3D();
+          popoverTarget.position.copy(portalMesh.position).add(new THREE.Vector3(0, 2, 0));
+          const popoverTextMesh = (() => {
+            const textMesh = ui.makeTextMesh('Multiplayer', undefined, 0.5, 'center', 'middle');
+            textMesh.position.z = 0.1;
+            textMesh.scale.x = popoverHeight / popoverWidth;
+            textMesh.color = 0xFFFFFF;
+            return textMesh;
+          })();
+          const popoverMesh = popovers.addPopover(popoverTextMesh, {
+            width: popoverWidth,
+            height: popoverHeight,
+            target: popoverTarget,
+          });
+        })
+    })(),
   ].concat(roomSpecs.map(async (roomSpec, i) => {
-    return world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street-room-' + i + '.url', null, new THREE.Vector3(-roomSpecs.length/2 - w/2 + i*w, 0, -w), new THREE.Quaternion())
+    const streetRoomScn = _clone(streetScn);
+    streetRoomScn.room = 'room-' + i;
+    return world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetRoomScn)])) + '/street-room-' + i + '.url', null, new THREE.Vector3(-roomSpecs.length/2 - w/2 + i*w, 0, -w), new THREE.Quaternion())
       .then(portalMesh => {
         portalMesh.material.uniforms.uColor.value.setHex(roomSpec.color);
         
