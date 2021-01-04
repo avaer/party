@@ -165,14 +165,6 @@ const floorMesh = (() => {
             add = 0.2;
           }
         }
-        /* if (
-          vPosition.x >= uCurrentParcel.x &&
-          vPosition.z >= uCurrentParcel.y &&
-          vPosition.x <= uCurrentParcel.z &&
-          vPosition.z <= uCurrentParcel.w
-        ) {
-          add = 0.2;
-        } */
       }
       c += add;
       a = (1.0-vDepth);
