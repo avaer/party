@@ -249,7 +249,7 @@ renderer.setAnimationLoop(animate);
     [w/2, w, w/2],
   ];
   await Promise.all([
-    world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street.url', null, new THREE.Vector3(), new THREE.Quaternion())
+    world.addStaticObject(URL.createObjectURL(new Blob([JSON.stringify(streetScn)])) + '/street.url', null, new THREE.Vector3(), new THREE.Quaternion())
       .then(portalMesh => {
         portalMesh.material.uniforms.uColor.value.setHex(0xFF0000);
         
@@ -273,7 +273,7 @@ renderer.setAnimationLoop(animate);
     (() => {
       const streetMultiplayerScn = _clone(streetScn);
       streetMultiplayerScn.room = 'multiplayer';
-      return world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetMultiplayerScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
+      return world.addStaticObject(URL.createObjectURL(new Blob([JSON.stringify(streetMultiplayerScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
         .then(portalMesh => {
           portalMesh.material.uniforms.uColor.value.setHex(0x00FF00);
           
@@ -298,7 +298,7 @@ renderer.setAnimationLoop(animate);
   ].concat(roomSpecs.map(async (roomSpec, i) => {
     const streetRoomScn = _clone(streetScn);
     streetRoomScn.room = 'room-' + i;
-    return world.addObject(URL.createObjectURL(new Blob([JSON.stringify(streetRoomScn)])) + '/street-room-' + i + '.url', null, new THREE.Vector3(-roomSpecs.length/2 - w/2 + i*w, 0, -w), new THREE.Quaternion())
+    return world.addStaticObject(URL.createObjectURL(new Blob([JSON.stringify(streetRoomScn)])) + '/street-room-' + i + '.url', null, new THREE.Vector3(-roomSpecs.length/2 - w/2 + i*w, 0, -w), new THREE.Quaternion())
       .then(portalMesh => {
         portalMesh.material.uniforms.uColor.value.setHex(roomSpec.color);
         
