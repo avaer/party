@@ -270,7 +270,7 @@ renderer.setAnimationLoop(animate);
           target: popoverTarget,
         });
       }),
-    (() => {
+    /* (() => {
       const streetMultiplayerScn = _clone(streetScn);
       streetMultiplayerScn.room = 'multiplayer';
       return world.addStaticObject(URL.createObjectURL(new Blob([JSON.stringify(streetMultiplayerScn)])) + '/street-multiplayer.url', null, new THREE.Vector3(w, 0, 0), new THREE.Quaternion())
@@ -294,7 +294,7 @@ renderer.setAnimationLoop(animate);
             target: popoverTarget,
           });
         })
-    })(),
+    })(), */
   ].concat(roomSpecs.map(async (roomSpec, i) => {
     const streetRoomScn = _clone(streetScn);
     streetRoomScn.room = 'room-' + i;
