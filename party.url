@@ -1,0 +1,24 @@
+{
+  "objects": [
+    {
+      "start_url": "https://webaverse.github.io/party/index.js",
+      "position": [
+        -3,
+        0,
+        -10
+      ]
+    }
+  ],
+  "extents": [
+    [
+      -2,
+      0,
+      -2
+    ],
+    [
+      2,
+      4,
+      2
+    ]
+  ]
+}
