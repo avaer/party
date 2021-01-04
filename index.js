@@ -166,7 +166,7 @@ const floorMesh = (() => {
           }
         }
       }
-      c += add;
+      // c += add;
       a = (1.0-vDepth);
       gl_FragColor = vec4(c, a);
     }
