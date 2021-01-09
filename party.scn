@@ -1,0 +1,12 @@
+{
+  "objects": [
+    {
+      "start_url": "./party/index.js",
+      "position": [
+        -3,
+        0,
+        -10
+      ]
+    }
+  ]
+}
