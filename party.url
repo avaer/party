@@ -1,14 +1,5 @@
 {
-  "objects": [
-    {
-      "start_url": "https://webaverse.github.io/party/index.js",
-      "position": [
-        -3,
-        0,
-        -10
-      ]
-    }
-  ],
+  "start_url": "https://webaverse.github.io/party/party.scn",
   "extents": [
     [
       -2,
