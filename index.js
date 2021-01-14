@@ -6,7 +6,7 @@ const localMatrix = new THREE.Matrix4();
 
 const _clone = o => JSON.parse(JSON.stringify(o));
 
-const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1/2, 0), new THREE.Quaternion(), new THREE.Vector3(1000, 1, 1000), false);
+const physicsId = physics.addBoxGeometry(new THREE.Vector3(0, -1, 0), new THREE.Quaternion(), new THREE.Vector3(1000, 1, 1000), false);
 
 const textMesh = ui.makeTextMesh('Mode Select', undefined, 30, 'center', 'middle');
 textMesh.position.set(0, 20, -100);
