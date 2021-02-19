@@ -207,12 +207,11 @@ const floorMesh = (() => {
 floorMesh.position.set(8, -0.1, 8);
 app.object.add(floorMesh);
 
-function animate(timestamp, frame, referenceSpace) {
+function animate() {
   const now = Date.now();
-
   floorMesh.material.uniforms.uAnimation.value = (now%2000)/2000;
 }
-renderer.setAnimationLoop(animate);
+app.addEventListener('frame', animate);
 
 (async () => {
   const w = 4;
